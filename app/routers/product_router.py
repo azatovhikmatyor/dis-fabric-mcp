@@ -87,6 +87,6 @@ async def get_frequently_bundled_products(product_code: str, token: str = Depend
         # sql_stmt,
         "select * from demo",
         engine,
-        params=(product_code, product_code),
+        # params=(product_code, product_code),
     )
     return df.to_markdown()
