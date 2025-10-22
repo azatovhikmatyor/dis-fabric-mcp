@@ -1,0 +1,11 @@
+pyodbc
+SQLAlchemy
+azure-identity
+fastapi
+uvicorn
+mcp
+fastapi-mcp
+pandas
+python-dotenv
+requests
+tabulate

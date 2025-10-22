@@ -1,0 +1,8 @@
+services:
+  fabric_mcp:
+    image: fabric_mcp:latest
+    build: .
+    env_file: .env
+    container_name: fabric_mcp_container
+    ports:
+      - "8000:8000"
