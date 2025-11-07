@@ -76,7 +76,7 @@ async def get_frequently_bundled_products(product_code: str, token: str = Depend
         - The tool should only be used when the product code is confidently identified.
         - If no relevant bundles are found, return a clear message indicating no results.
 
-    ProductCode, ProductDescription and PercentageOfInvoicesContainTheProduct columns are important.
+    product_id, product_name columns are important. bought_together_count is not necessary.
 
     Do NOT use this tool for general product lookup or ambiguous input.
     Ensure the input product code is specific and accurate before calling this tool.
@@ -84,9 +84,8 @@ async def get_frequently_bundled_products(product_code: str, token: str = Depend
     sql_stmt = load_sql("product/get_frequently_bundled_products.sql")
     engine = engine_manager.get_engine()
     df = pd.read_sql(
-        # sql_stmt,
-        "select * from demo",
+        sql_stmt,
         engine,
-        # params=(product_code, product_code),
+        params=(product_code, product_code),
     )
     return df.to_markdown()
