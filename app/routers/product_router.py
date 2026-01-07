@@ -120,7 +120,7 @@ async def search_products(
     """
     sql_stmt = load_sql("product/search_products.sql")
     engine = engine_manager.get_engine()
-    q = "%{query.lower()}%"
+    q = f"%{query.lower()}%"
 
     df = pd.read_sql(
         sql_stmt,
