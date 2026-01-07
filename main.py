@@ -16,6 +16,7 @@ tool_names = [
     # from product router
     'find_product_code', 
     'get_frequently_bundled_products', 
+    'search_products',
     
     # from inventory router
     'ramaining_quantity',

@@ -89,4 +89,42 @@ async def get_frequently_bundled_products(product_code: str, token: str = Depend
         params=(product_code, product_code),
     )
     return df.to_json()
-    return df.to_markdown()
+
+
+
+@router.get(
+    "/search_products",
+    operation_id="search_products"
+)
+async def search_products(
+    query: str,
+    token: str = Depends(verify_token)
+) -> str:
+    """
+    Use this tool to search for HVAC products based on general or descriptive input.
+
+    Input:
+        - query: Free-text description such as product name, category, brand,
+          capacity, or any partial information (e.g. "3 ton inverter AC",
+          "Daikin compressor", "air handler").
+
+    Behavior:
+        - Return all products related to the given input.
+        - Match against product name, category, brand, and description.
+        - Use this tool when the user input is vague, partial, or exploratory.
+        - If no products are found, return a clear message indicating no results.
+
+    Important:
+        - This tool is for discovery and search.
+        - Do NOT use this tool when an exact product_code is already known.
+    """
+    sql_stmt = load_sql("product/search_products.sql")
+    engine = engine_manager.get_engine()
+
+    df = pd.read_sql(
+        sql_stmt,
+        engine,
+        params={"query": f"%{query.lower()}%"}
+    )
+
+    return df.to_json()
