@@ -4,6 +4,6 @@ SELECT
     p.category
 FROM dim_product p
 WHERE
-    LOWER(p.product_name) LIKE :query
-    OR LOWER(p.category) LIKE :query
+    LOWER(p.product_name) LIKE ?
+    OR LOWER(p.category) LIKE ?
 ORDER BY p.product_name;
