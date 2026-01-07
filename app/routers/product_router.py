@@ -88,4 +88,5 @@ async def get_frequently_bundled_products(product_code: str, token: str = Depend
         engine,
         params=(product_code, product_code),
     )
+    return df.to_json()
     return df.to_markdown()
